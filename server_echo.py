@@ -37,7 +37,7 @@ class Server:
             await self.send_to_clients(message)
 
 server = Server()
-start_server = websockets.serve(server.ws_handler, '127.0.0.1', 13000)
+start_server = websockets.serve(server.ws_handler, '195.134.67.142', 7000)
 loop = get_event_loop()
 loop.run_until_complete(start_server)
 loop.run_forever()
