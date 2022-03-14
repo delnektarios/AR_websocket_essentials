@@ -12,4 +12,4 @@ async def produce_one(image_path: str, host: str, port: int) -> None:
         await ws.send(encoded_string)
         await ws.recv()
 
-asyncio.run(produce_one("./image.jpg", host='195.134.67.142', port=7000))
+asyncio.run(produce_one("./image.jpg", host='195.134.67.142', port=6000))
