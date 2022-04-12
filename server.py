@@ -21,6 +21,8 @@ class Server:
     
     async def send_to_clients(self, message: str) -> None:
         if self.clients:
+        #we dont want that now
+        #if False:
             await asyncio.wait([client.send(message) for client in self.clients])
     
     async def ws_handler(self, ws: WebSocketServerProtocol, url: str) -> None:
@@ -37,13 +39,15 @@ class Server:
             await self.send_to_clients(message)
 
 server = Server()
-alert_server = websockets.serve(server.ws_handler, '195.134.67.142', 6001)
-message_server = websockets.serve(server.ws_handler, '195.134.67.142', 6002)
-tweet_server = websockets.serve(server.ws_handler, '195.134.67.142', 6003)
-multimedia_server = websockets.serve(server.ws_handler, '195.134.67.142', 6004)
+alert_socket = websockets.serve(server.ws_handler, '195.134.67.142', 6001)
+message_socket = websockets.serve(server.ws_handler, '195.134.67.142', 6002)
+tweet_socket = websockets.serve(server.ws_handler, '195.134.67.142', 6003)
+multimedia_socket = websockets.serve(server.ws_handler, '195.134.67.142', 6004)
+mission_socket = websockets.serve(server.ws_handler, '195.134.67.142', 6005)
 loop = get_event_loop()
-loop.run_until_complete(alert_server)
-loop.run_until_complete(message_server)
-loop.run_until_complete(tweet_server)
-loop.run_until_complete(multimedia_server)
+loop.run_until_complete(alert_socket)
+loop.run_until_complete(message_socket)
+loop.run_until_complete(tweet_socket)
+loop.run_until_complete(multimedia_socket)
+loop.run_until_complete(mission_socket)
 loop.run_forever()
